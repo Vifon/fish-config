@@ -84,4 +84,18 @@ function fish_user_key_bindings
         end
     end
     bind \ea __accept-and-hold
+
+    function __subfish
+        set dir (string unescape (commandline --current-token))
+        if not test -d $dir
+            return 1
+        end
+
+        echo ' ><>'             # Draw a fish just cause.
+        pushd $dir
+        fish
+        popd
+        commandline -f repaint
+    end
+    bind \cx\cf __subfish
 end
