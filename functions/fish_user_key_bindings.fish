@@ -15,7 +15,6 @@ function fish_user_key_bindings
 
     function __ranger-cd
         set tempfile (mktemp -t tmp.XXXXXX)
-        set -l ranger_flags
         if set -q fish_history; and test -z "$fish_history"
             ranger -c --choosedir=$tempfile (pwd)
         else
