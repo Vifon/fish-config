@@ -1,18 +1,4 @@
-function __postexec_bell --on-event fish_postexec
-    printf '\a'
-end
-
-function __cwd_to_urxvt --on-variable PWD
-    set -l update \033"]777;cwd-spawn;path;$PWD"\007
-
-     switch $TERM
-        case "rxvt-unicode*"
-            echo -n $update
-    end
-end
-__cwd_to_urxvt
-
-# WINDOWID is set by xterm like terminals
+# WINDOWID is set by xterm-like terminals
 if test "$SESSION" = "emacs" -a -n "$WINDOWID"
     set -l exwm_check (emacsclient -n -a false --eval "(featurep 'exwm)" 2> /dev/null)
     if test "$exwm_check" = t
@@ -25,12 +11,5 @@ if test "$SESSION" = "emacs" -a -n "$WINDOWID"
             " > /dev/null
         end
         __exwm_chpwd
-    end
-end
-
-function __preexec_save --on-event fish_preexec
-    set trimmed (string trim $argv[1])
-    if test -n "$trimmed"
-        set -g last_commandline $argv[1]
     end
 end

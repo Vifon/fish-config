@@ -18,8 +18,6 @@ else
     dircolors -c | source
 end
 
-source ~/.config/fish/hooks.fish
-
 function history-fzf
     history | fzf --multi | fish --interactive
 end
