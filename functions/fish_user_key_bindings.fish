@@ -14,14 +14,15 @@ function fish_user_key_bindings
     end
 
     function __ranger-cd
-        set tempfile (mktemp -t tmp.XXXXXX)
+        set tempfile (mktemp -t ranger.XXXXXX)
         if set -q fish_history; and test -z "$fish_history"
+            # We're in the private mode, ranger should respect it too.
             ranger -c --choosedir=$tempfile (pwd)
         else
             ranger --choosedir=$tempfile (pwd)
         end
         if test -f $tempfile
-            cd (cat $tempfile)
+            cd (cat -- $tempfile)
         end
         rm -f -- $tempfile
         commandline -f repaint
