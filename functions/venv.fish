@@ -16,6 +16,12 @@ function venv --description 'Activate a Python virtualenv' \
     if test -e $project_root/$activate_path
         . $project_root/$activate_path
     else
-        return 1
+        read -l -n1 -P 'Create a new virtualenv? [y/N] ' confirm
+        if test $confirm = y
+            virtualenv .venv
+            venv
+        else
+            return 1
+        end
     end
 end
