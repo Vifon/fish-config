@@ -32,7 +32,7 @@ function fish_user_key_bindings
     function __most_recent_file
         set arg (commandline --current-token)
 
-        set candidates (string unescape $arg)*
+        set candidates (string unescape $arg | sed 's,^~/,'"$HOME/"',')*
         if test (count $candidates) = 0
             return
         end
@@ -86,7 +86,7 @@ function fish_user_key_bindings
     bind \ea __accept-and-hold
 
     function __subfish
-        set dir (string unescape (commandline --current-token))
+        set dir (string unescape (commandline --current-token) | sed 's,^~/,'"$HOME/"',')
         if not test -d $dir
             return 1
         end
