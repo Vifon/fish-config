@@ -1,5 +1,5 @@
 # WINDOWID is set by xterm-like terminals
-if test "$SESSION" = "emacs" -a -n "$WINDOWID"
+if status is-interactive; and test "$SESSION" = "emacs" -a -n "$WINDOWID"
     set -l exwm_check (emacsclient -n -a false --eval "(featurep 'exwm)" 2> /dev/null)
     if test "$exwm_check" = t
         function __exwm_chpwd --on-variable PWD
