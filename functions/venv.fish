@@ -20,9 +20,6 @@ function venv --description 'Activate a Python virtualenv' \
         if test $confirm = y
             virtualenv .venv
             venv
-            if test -e requirements.txt
-                pip install -r requirements.txt
-            end
         else
             return 1
         end
