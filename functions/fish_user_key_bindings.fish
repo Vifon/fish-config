@@ -10,12 +10,12 @@ function fish_user_key_bindings
     bind \e" " prepend-space
 
     function priv
-        set -g fish_history
+        exec fish --private
     end
 
     function __ranger-cd
         set tempfile (mktemp -t ranger.XXXXXX)
-        if set -q fish_history; and test -z "$fish_history"
+        if set -q fish_private_mode
             # We're in the private mode, ranger should respect it too.
             ranger -c --choosedir=$tempfile (pwd)
         else
