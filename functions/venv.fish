@@ -18,7 +18,7 @@ function venv --description 'Activate a Python virtualenv' \
     else
         read -l -n1 -P 'Create a new virtualenv? [y/N] ' confirm
         if test $confirm = y
-            virtualenv .venv
+            python -m venv .venv
             venv
         else
             return 1
